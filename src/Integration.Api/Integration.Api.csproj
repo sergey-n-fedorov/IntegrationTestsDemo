@@ -8,6 +8,8 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Integration.Data\Integration.Data.csproj" />
+      <ProjectReference Include="..\Integration.Services\Integration.Services.csproj" />
+      <ProjectReference Include="..\Integration.Shared\Integration.Shared.csproj" />
     </ItemGroup>
 
     <ItemGroup>

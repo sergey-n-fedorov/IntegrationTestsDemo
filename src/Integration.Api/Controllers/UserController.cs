@@ -1,5 +1,8 @@
 using Integration.Data.Models;
 using Integration.Data.Repositories;
+using Integration.Services;
+using Integration.Services.Impl;
+using Integration.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Integration.Api.Controllers;
@@ -8,11 +11,11 @@ namespace Integration.Api.Controllers;
 [ApiController]
 public class UserController : ControllerBase
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IUserService _userService;
 
-    public UserController(IUserRepository userRepository)
+    public UserController(IUserService userService)
     {
-        _userRepository = userRepository;
+        _userService = userService;
     }
 
     [HttpPut("fetch")]
@@ -22,19 +25,19 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<UserEntity>>> GetAll()
+    public async Task<ActionResult<List<User>>> GetAll()
     {
-        return await _userRepository.GetAllUsersAsync();
+        return await _userService.GetAllAsync();
     }
     
     [HttpPut]
-    public async Task<ActionResult> CreateUser([FromBody] UserEntity userEntity)
+    public async Task<ActionResult> CreateUser([FromBody] User user)
     {
         return Ok();
     }
     
     [HttpPost]
-    public async Task<ActionResult> UpdateUser([FromBody] UserEntity userEntity)
+    public async Task<ActionResult> UpdateUser([FromBody] User user)
     {
         return Ok();
     }
