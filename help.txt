@@ -1,0 +1,2 @@
+Migrations
+dotnet ef migrations add InitialCreate --startup-project ..\IntegrationService.Api\IntegrationService.Api.csproj
