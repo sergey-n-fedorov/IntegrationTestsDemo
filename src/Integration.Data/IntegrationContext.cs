@@ -1,5 +1,5 @@
 ﻿using Integration.Data.Configurations;
-using Integration.Data.Models;
+using Integration.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 

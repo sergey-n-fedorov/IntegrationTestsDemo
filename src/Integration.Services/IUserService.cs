@@ -6,4 +6,5 @@ public interface IUserService
 {
     Task FetchAsync();
     Task<List<User>> GetAllAsync();
+    Task UpdateUserAsync(User user);
 }

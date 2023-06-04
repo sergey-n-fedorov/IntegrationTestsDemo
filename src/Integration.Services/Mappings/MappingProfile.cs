@@ -1,5 +1,5 @@
 using AutoMapper;
-using Integration.Data.Models;
+using Integration.Data.Entities;
 using Integration.Shared.Models;
 
 namespace Integration.Services.Mappings;

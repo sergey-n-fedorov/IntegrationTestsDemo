@@ -1,14 +1,8 @@
-using Integration.Data.Models;
+using Integration.Data.Entities;
 using IntegrationService.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Integration.Data.Repositories;
-
-public interface IUserRepository
-{
-    Task AddUser(UserEntity userEntity);
-    Task<List<UserEntity>> GetAllUsersAsync();
-}
 
 public class UserRepository : IUserRepository
 {
@@ -28,5 +22,23 @@ public class UserRepository : IUserRepository
     public Task<List<UserEntity>> GetAllUsersAsync()
     {
         return _context.Users.ToListAsync();
+    }
+
+    public Task<UserEntity?> Find(int userId)
+    {
+        return _context.Users.FindAsync(userId).AsTask();
+    }
+    
+    public Task UpdateUserAsync(UserEntity userEntity)
+    {
+        _context.Entry(userEntity).State = EntityState.Modified;
+        return _context.SaveChangesAsync();
+
+    }
+
+    public Task AddRangeAsync(IEnumerable<UserEntity> entities)
+    {
+        _context.Users.AddRange(entities);
+         return _context.SaveChangesAsync();
     }
 }

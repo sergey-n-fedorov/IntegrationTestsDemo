@@ -1,7 +1,4 @@
-using Integration.Data.Models;
-using Integration.Data.Repositories;
 using Integration.Services;
-using Integration.Services.Impl;
 using Integration.Shared.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,9 +15,10 @@ public class UserController : ControllerBase
         _userService = userService;
     }
 
-    [HttpPut("fetch")]
-    public async Task<ActionResult> FetchData()
+    [HttpPost("fetch")]
+    public async Task<ActionResult> Fetch()
     {
+        await _userService.FetchAsync();
         return Ok();
     }
 
@@ -30,15 +28,11 @@ public class UserController : ControllerBase
         return await _userService.GetAllAsync();
     }
     
-    [HttpPut]
-    public async Task<ActionResult> CreateUser([FromBody] User user)
-    {
-        return Ok();
-    }
     
     [HttpPost]
     public async Task<ActionResult> UpdateUser([FromBody] User user)
     {
+        await _userService.UpdateUserAsync(user);
         return Ok();
     }
 }
