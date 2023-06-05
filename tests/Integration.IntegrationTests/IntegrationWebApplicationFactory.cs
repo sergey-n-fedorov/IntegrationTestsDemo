@@ -17,8 +17,10 @@ public class IntegrationWebApplicationFactory : WebApplicationFactory<UserContro
     public IIntegrationServiceClient GetClient() => _clientProvider.GetClient();
     public IDisposable CreateClientScope(ExampleContext exampleContext) => _clientProvider.CreateExampleContextScope(exampleContext);
     
+    public MockSetup MockSetup { get; } = new MockSetup();
+    
     private readonly PostgreSqlContainer _postgresSqlContainer = new PostgreSqlBuilder()
-        // .WithPortBinding(51111, PostgreSqlBuilder.PostgreSqlPort)
+        .WithPortBinding(51111, PostgreSqlBuilder.PostgreSqlPort)
         .WithDatabase(DatabaseName)
         // .WithDatabaseBackupMapping("TestData/Dumps/data_backup.dump")
         .Build();
@@ -28,6 +30,8 @@ public class IntegrationWebApplicationFactory : WebApplicationFactory<UserContro
     {
         builder.ConfigureServices(services =>
         {
+            services.AddSingleton(MockSetup.ExternalServiceClient.Object);
+            
             services.AddSingleton(new IntegrationContextConfiguration() { ConnectionString = _postgresSqlContainer.GetConnectionString() });
         });
         

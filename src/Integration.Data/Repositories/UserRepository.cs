@@ -3,6 +3,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Integration.Data.Repositories;
 
+public interface IUserRepository
+{
+    Task AddUser(UserEntity userEntity);
+    Task<List<UserEntity>> GetAllUsersAsync();
+    Task<UserEntity?> Find(int userId);
+    Task UpdateUserAsync(UserEntity userEntity);
+    Task AddRangeAsync(IEnumerable<UserEntity> entities);
+}
+
 public class UserRepository : IUserRepository
 {
     private readonly IntegrationContext _context;

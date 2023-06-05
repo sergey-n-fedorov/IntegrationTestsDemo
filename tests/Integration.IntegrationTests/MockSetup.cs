@@ -1,5 +1,4 @@
 using Integration.Services.External;
-using Integration.Shared.Clients;
 using Moq;
 
 namespace Integration.IntegrationTests;
@@ -17,7 +16,6 @@ public class MockSetup
     {
         ExternalServiceClient.Reset();
         
-        ExternalServiceClient.Setup(w => w.GetAllUsersAsync())
-            .ReturnsAsync();
+        ExternalServiceClient.Setup(w => w.GetAllUsersAsync()).ReturnsAsync(TestDataProvider.ExternalUsers);
     }
 }

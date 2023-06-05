@@ -1,2 +1,17 @@
-{
-}
+[
+  {
+    "Id": "dd170c4a-719a-472d-b386-b3c96e69f688",
+    "Name": "Name1",
+    "Address": "Address1"
+  },
+  {
+    "Id": "80d9fccc-dad5-4613-a77a-2652625af945",
+    "Name": "Name2",
+    "Address": "Address2"
+  },
+  {
+    "Id": "4cb6a499-8d33-48d1-ab61-c2241008ca94",
+    "Name": "Name3",
+    "Address": "Address3"
+  }
+]
