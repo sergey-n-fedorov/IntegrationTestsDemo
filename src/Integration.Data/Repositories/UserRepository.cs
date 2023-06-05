@@ -1,5 +1,4 @@
 using Integration.Data.Entities;
-using IntegrationService.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace Integration.Data.Repositories;

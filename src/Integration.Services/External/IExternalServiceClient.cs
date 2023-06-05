@@ -1,8 +1,12 @@
-﻿namespace Integration.Services.External;
+﻿using Refit;
+
+namespace Integration.Services.External;
 
 public interface IExternalServiceClient
 {
+    [Get("/api/v1/User")]
     public Task<List<ExternalUser>> GetAllUsersAsync();
     
+    [Post("/api/v1/User")]
     public Task UpdateUser(ExternalUser user);
 }

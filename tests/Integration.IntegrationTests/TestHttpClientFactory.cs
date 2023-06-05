@@ -23,13 +23,11 @@ public class TestHttpClientFactory<TEntryPoint> : IHttpClientFactory where TEntr
     public HttpClient CreateClient(string name)
     {
         var client = _webApplicationFactory.CreateDefaultClient(_delegatingHandlers);
-
+        
         var options = _optionsMonitor.Get(name);
-
         foreach (var httpClientAction in options.HttpClientActions) {
             httpClientAction(client);
         }
-
         return client;
     }
 }

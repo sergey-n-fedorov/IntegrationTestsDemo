@@ -2,26 +2,31 @@
 
 public class ExampleContext
 {
-    public Guid CorrelationId { get; set; }
+    public ExampleContext(Guid? correlationId)
+    {
+        CorrelationId = correlationId;
+    }
+
+    public Guid? CorrelationId { get; }
 }
 
 public interface IExampleContextProvider
 {
-    ExampleContext Get();
+    ExampleContext? Get();
 
-    void Set(ExampleContext context);
+    void Set(ExampleContext? context);
 }
 
 public class ExampleContextProvider : IExampleContextProvider
 {
-    private static readonly AsyncLocal<ExampleContext> AsyncLocal = new();
+    private static readonly AsyncLocal<ExampleContext?> AsyncLocal = new();
     
-    public ExampleContext Get()
+    public ExampleContext? Get()
     {
-        return AsyncLocal.Value!;
+        return AsyncLocal.Value;
     }
 
-    public void Set(ExampleContext context)
+    public void Set(ExampleContext? context)
     {
         AsyncLocal.Value = context;
     }

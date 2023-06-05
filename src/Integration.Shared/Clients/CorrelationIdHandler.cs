@@ -1,17 +1,18 @@
 ﻿namespace Integration.Shared.Clients;
 
-public class ExampleDelegatingHandler: DelegatingHandler
+public class CorrelationIdHandler: DelegatingHandler
 {
     private readonly IExampleContextProvider _exampleContextProvider;
 
-    public ExampleDelegatingHandler(IExampleContextProvider exampleContextProvider)
+    public CorrelationIdHandler(IExampleContextProvider exampleContextProvider)
     {
         _exampleContextProvider = exampleContextProvider;
     }
 
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
     {
-        _exampleContextProvider.Set(new ExampleContext { CorrelationId = Guid.NewGuid() });
+        var context = _exampleContextProvider.Get();
+        request.Headers.Add(Constants.CorrelationIdHeaderName, context?.CorrelationId?.ToString());
         return await base.SendAsync(request, cancellationToken);
     }
 }

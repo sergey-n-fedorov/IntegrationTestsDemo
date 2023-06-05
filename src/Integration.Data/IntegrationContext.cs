@@ -1,23 +1,22 @@
 ﻿using Integration.Data.Configurations;
 using Integration.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
-namespace IntegrationService.Data
+namespace Integration.Data
 {
     public class IntegrationContext : DbContext
     {
         public DbSet<UserEntity> Users { get; set; }
-        private readonly string _connectionString;
+        private readonly IntegrationContextConfiguration _contextConfiguration;
 
-        public IntegrationContext(IConfiguration config)
+        public IntegrationContext(IntegrationContextConfiguration contextConfiguration)
         {
-            _connectionString = config.GetConnectionString("IntergrationDb")!;
+            _contextConfiguration = contextConfiguration;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql(_connectionString);
+            optionsBuilder.UseNpgsql(_contextConfiguration.ConnectionString);
             base.OnConfiguring(optionsBuilder);
         }
 

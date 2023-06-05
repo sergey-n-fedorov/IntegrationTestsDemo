@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
+﻿using Integration.Shared.Clients;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Http;
 using Microsoft.Extensions.Options;
-using Refit;
 
 namespace Integration.IntegrationTests;
 
@@ -20,18 +21,9 @@ public static class ServiceExtensions
 
     public static void RegisterCustomHttpClientFactoryForRefit<TEntryPoint>(this IServiceCollection serviceCollection) where TEntryPoint : class
     {
-        serviceCollection.TryAddTransient<ApiKeyHandler>();
-        serviceCollection.TryAddTransient<OperationContextPropagationHandler<UserContext>>();
+        serviceCollection.TryAddTransient<CorrelationIdHandler>();
         serviceCollection.RegisterCustomHttpClientFactory<TEntryPoint>(w => new DelegatingHandler[] {
-            w.GetRequiredService<ApiKeyHandler>(),
-            w.GetRequiredService<OperationContextPropagationHandler<UserContext>>()
+            w.GetRequiredService<CorrelationIdHandler>(),
         });
-    }
-    
-    public static void AddTestRefitClient<TClient>(this IServiceCollection serviceCollection) where TClient : class
-    {
-        var refitSettings = new RefitSettings { ContentSerializer = new NewtonsoftJsonContentSerializer(HttpClientConsts.DefaultJsonSerializerSettings) };
-        refitSettings.ExceptionFactory = new BaseResponseExceptionFactory(refitSettings.ExceptionFactory).ExecuteAsync;
-        serviceCollection.AddRefitClient<TClient>(refitSettings);
     }
 }

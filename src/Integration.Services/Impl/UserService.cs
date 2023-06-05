@@ -2,6 +2,7 @@
 using Integration.Data.Entities;
 using Integration.Data.Repositories;
 using Integration.Services.External;
+using Integration.Shared;
 using Integration.Shared.Models;
 
 namespace Integration.Services.Impl;
@@ -11,12 +12,14 @@ public class UserService : IUserService
     private readonly IMapper _mapper;
     private readonly IUserRepository _userRepository;
     private readonly IExternalServiceClient _externalServiceClient;
+    private readonly IExampleContextProvider _exampleContextProvider;
 
-    public UserService(IUserRepository userRepository, IMapper mapper, IExternalServiceClient externalServiceClient)
+    public UserService(IUserRepository userRepository, IMapper mapper, IExternalServiceClient externalServiceClient, IExampleContextProvider exampleContextProvider)
     {
         _userRepository = userRepository;
         _mapper = mapper;
         _externalServiceClient = externalServiceClient;
+        _exampleContextProvider = exampleContextProvider;
     }
 
     public async Task FetchAsync()
