@@ -17,8 +17,8 @@ public class UserEndpointTests : IClassFixture<IntegrationWebApplicationFactory>
     private static readonly Guid TestCorrelationId = new("11111111-1111-1111-1111-111111111111"); 
     
     protected WebApplicationFactoryScope CreateServerScope(Guid correlationId) =>  new(_factory.Services, new ExampleContext(correlationId));
-    protected IIntegrationServiceClient GetClient() => _factory.ClientServiceProvider.GetClient();
     protected IDisposable CreateClientScope(ExampleContext exampleContext) => _factory.ClientServiceProvider.CreateExampleContextScope(exampleContext);
+    protected IIntegrationServiceClient GetClient() => _factory.ClientServiceProvider.GetClient();
 
     public UserEndpointTests(IntegrationWebApplicationFactory factory, ITestOutputHelper output)
     {

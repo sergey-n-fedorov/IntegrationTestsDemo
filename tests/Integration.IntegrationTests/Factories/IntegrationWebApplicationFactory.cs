@@ -18,7 +18,7 @@ public class IntegrationWebApplicationFactory : WebApplicationFactory<UserContro
     public MockSetup MockSetup { get; } = new();
     
     private readonly PostgreSqlContainer _postgresSqlContainer = new PostgreSqlBuilder()
-        .WithPortBinding(51111, PostgreSqlBuilder.PostgreSqlPort)
+        // .WithPortBinding(51111, PostgreSqlBuilder.PostgreSqlPort)
         .WithDatabase(DatabaseName)
         // .WithDatabaseBackupMapping("TestData/Dumps/data_backup.dump")
         .Build();
