@@ -4,11 +4,11 @@ using Newtonsoft.Json;
 
 namespace Integration.IntegrationTests.Tests.Basic;
 
-public class DumpRestoreTests : IClassFixture<DumpWebApplicationFactory>, IDisposable
+public class DumpRestoreTests : IClassFixture<DumpingWebApplicationFactory>, IDisposable
 {
-    private readonly DumpWebApplicationFactory _factory;
+    private readonly DumpingWebApplicationFactory _factory;
 
-    public DumpRestoreTests(DumpWebApplicationFactory factory)
+    public DumpRestoreTests(DumpingWebApplicationFactory factory)
     {
         _factory = factory;
     }

@@ -2,11 +2,11 @@ using Integration.IntegrationTests.Factories;
 
 namespace Integration.IntegrationTests.Tests.Basic;
 
-public abstract class ClassFixtureTests : IClassFixture<BasicWebApplicationFactory>
+public abstract class ClassFixtureTests : IClassFixture<BaseWebApplicationFactory>
 {
-    private readonly BasicWebApplicationFactory _factory;
+    private readonly BaseWebApplicationFactory _factory;
 
-    public ClassFixtureTests(BasicWebApplicationFactory factory)
+    public ClassFixtureTests(BaseWebApplicationFactory factory)
     {
         _factory = factory;
     }
@@ -28,21 +28,21 @@ public abstract class ClassFixtureTests : IClassFixture<BasicWebApplicationFacto
 
 public class ClassFixture1Tests : ClassFixtureTests
 {
-    public ClassFixture1Tests(BasicWebApplicationFactory factory) : base(factory)
+    public ClassFixture1Tests(BaseWebApplicationFactory factory) : base(factory)
     {
     }
 }
 
 public class ClassFixture2Tests : ClassFixtureTests
 {
-    public ClassFixture2Tests(BasicWebApplicationFactory factory) : base(factory)
+    public ClassFixture2Tests(BaseWebApplicationFactory factory) : base(factory)
     {
     }
 }
 
 public class ClassFixture3Tests : ClassFixtureTests
 {
-    public ClassFixture3Tests(BasicWebApplicationFactory factory) : base(factory)
+    public ClassFixture3Tests(BaseWebApplicationFactory factory) : base(factory)
     {
     }
 }

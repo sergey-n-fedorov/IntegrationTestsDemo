@@ -4,11 +4,11 @@ using Integration.IntegrationTests.Tools;
 using Integration.Shared.Models;
 using Newtonsoft.Json;
 
-public class ConditionalDumpRestoreTests : IClassFixture<DumpWebApplicationFactory>, IDisposable
+public class ConditionalDumpRestoreTests : IClassFixture<DumpingWebApplicationFactory>, IDisposable
 {
-    private readonly DumpWebApplicationFactory _factory;
+    private readonly DumpingWebApplicationFactory _factory;
 
-    public ConditionalDumpRestoreTests(DumpWebApplicationFactory factory)
+    public ConditionalDumpRestoreTests(DumpingWebApplicationFactory factory)
     {
         _factory = factory;
         

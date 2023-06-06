@@ -3,7 +3,7 @@ using Integration.IntegrationTests.Factories;
 namespace Integration.IntegrationTests.Tests.Basic;
 
 [CollectionDefinition(nameof(CollectionFixture))]
-public class CollectionFixture : ICollectionFixture<BasicWebApplicationFactory>
+public class CollectionFixture : ICollectionFixture<BaseWebApplicationFactory>
 {
     // This class has no code, and is never created. Its purpose is simply
     // to be the place to apply [CollectionDefinition] and all the
@@ -13,9 +13,9 @@ public class CollectionFixture : ICollectionFixture<BasicWebApplicationFactory>
 [Collection(nameof(CollectionFixture))]
 public abstract class CollectionFixtureTests 
 {
-    private readonly BasicWebApplicationFactory _factory;
+    private readonly BaseWebApplicationFactory _factory;
 
-    public CollectionFixtureTests(BasicWebApplicationFactory factory)
+    public CollectionFixtureTests(BaseWebApplicationFactory factory)
     {
         _factory = factory;
     }
@@ -37,14 +37,14 @@ public abstract class CollectionFixtureTests
 
 public class CollectionFixture1Tests : CollectionFixtureTests
 {
-    public CollectionFixture1Tests(BasicWebApplicationFactory factory) : base(factory)
+    public CollectionFixture1Tests(BaseWebApplicationFactory factory) : base(factory)
     {
     }
 }
 
 public class CollectionFixture2Tests : CollectionFixtureTests
 {
-    public CollectionFixture2Tests(BasicWebApplicationFactory factory) : base(factory)
+    public CollectionFixture2Tests(BaseWebApplicationFactory factory) : base(factory)
     {
     }
 }
