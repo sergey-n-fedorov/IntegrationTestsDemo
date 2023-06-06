@@ -1,7 +1,7 @@
 using Integration.Shared;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Integration.IntegrationTests;
+namespace Integration.IntegrationTests.Tools;
 
 
 //For context and scoped services

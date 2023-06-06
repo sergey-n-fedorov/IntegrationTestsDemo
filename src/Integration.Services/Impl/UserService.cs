@@ -38,12 +38,21 @@ public class UserService : IUserService
     public async Task UpdateUserAsync(User user)
     {
         var dbUser = await _userRepository.Find(user.Id);
-
         if (dbUser == null) throw new KeyNotFoundException();
 
         dbUser.Address = user.Address;
         dbUser.Name = user.Name;
 
         await _userRepository.UpdateUserAsync(dbUser);
+    }
+
+    public async Task DeleteAsync(int userId)
+    {
+        var dbUser = await _userRepository.Find(userId);
+
+        if (dbUser != null)
+        {
+            await _userRepository.DeleteUserAsync(dbUser);
+        }
     }
 }

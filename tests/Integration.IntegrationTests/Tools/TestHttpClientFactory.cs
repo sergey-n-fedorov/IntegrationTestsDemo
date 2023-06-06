@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Http;
 using Microsoft.Extensions.Options;
 
-namespace Integration.IntegrationTests;
+namespace Integration.IntegrationTests.Tools;
 
 public class TestHttpClientFactory<TEntryPoint> : IHttpClientFactory where TEntryPoint : class
 {

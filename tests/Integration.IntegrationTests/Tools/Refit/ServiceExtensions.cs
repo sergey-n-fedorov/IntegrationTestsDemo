@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Http;
 using Microsoft.Extensions.Options;
 
-namespace Integration.IntegrationTests;
+namespace Integration.IntegrationTests.Tools.Refit;
 
 public static class ServiceExtensions
 {

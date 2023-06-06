@@ -1,11 +1,14 @@
+using Integration.IntegrationTests.Factories;
+using Integration.IntegrationTests.Tools;
 using Integration.Services;
 using Integration.Shared;
+using Integration.Shared.Clients;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit.Abstractions;
 
-namespace Integration.IntegrationTests;
+namespace Integration.IntegrationTests.Tests;
 
-public class Tests : IClassFixture<IntegrationWebApplicationFactory>, IDisposable
+public class UserEndpointTests : IClassFixture<IntegrationWebApplicationFactory>, IDisposable
 {
     private readonly IDisposable _contextScope;
     private readonly IntegrationWebApplicationFactory _factory;
@@ -14,28 +17,30 @@ public class Tests : IClassFixture<IntegrationWebApplicationFactory>, IDisposabl
     private static readonly Guid TestCorrelationId = new("11111111-1111-1111-1111-111111111111"); 
     
     protected WebApplicationFactoryScope CreateServerScope(Guid correlationId) =>  new(_factory.Services, new ExampleContext(correlationId));
+    protected IIntegrationServiceClient GetClient() => _factory.ClientServiceProvider.GetClient();
+    protected IDisposable CreateClientScope(ExampleContext exampleContext) => _factory.ClientServiceProvider.CreateExampleContextScope(exampleContext);
 
-    public Tests(IntegrationWebApplicationFactory factory, ITestOutputHelper output)
+    public UserEndpointTests(IntegrationWebApplicationFactory factory, ITestOutputHelper output)
     {
         _factory = factory;
         _output = output;
 
-        _contextScope = _factory.CreateClientScope(new ExampleContext(TestCorrelationId));
+        _contextScope = CreateClientScope(new ExampleContext(TestCorrelationId));
     }
 
     [Fact]
     public async Task Test()
     {
-        await _factory.GetClient().FetchUsersAsync();
+        await GetClient().FetchUsersAsync();
         _output.WriteLine("Done");
     }
 
     [Fact]
     public async Task Test_ClientScope()
     {
-        using (_factory.CreateClientScope(new ExampleContext(Guid.NewGuid())))
+        using (CreateClientScope(new ExampleContext(Guid.NewGuid())))
         {
-            await _factory.GetClient().FetchUsersAsync();
+            await GetClient().FetchUsersAsync();
         }
     }
     

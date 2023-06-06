@@ -1,6 +1,6 @@
 using DotNet.Testcontainers.Containers;
 
-namespace Integration.IntegrationTests.TestContainers;
+namespace Integration.IntegrationTests.Tools.TestContainers;
 
 public static class DockerContainerExtensions
 {

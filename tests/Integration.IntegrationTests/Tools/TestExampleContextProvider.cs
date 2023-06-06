@@ -1,6 +1,6 @@
 using Integration.Shared;
 
-namespace Integration.IntegrationTests;
+namespace Integration.IntegrationTests.Tools;
 
 public class TestExampleContextProvider : IExampleContextProvider
 {

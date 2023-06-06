@@ -10,6 +10,7 @@ public interface IUserRepository
     Task<UserEntity?> Find(int userId);
     Task UpdateUserAsync(UserEntity userEntity);
     Task AddRangeAsync(IEnumerable<UserEntity> entities);
+    Task DeleteUserAsync(UserEntity userEntity);
 }
 
 public class UserRepository : IUserRepository
@@ -48,5 +49,11 @@ public class UserRepository : IUserRepository
     {
         _context.Users.AddRange(entities);
          return _context.SaveChangesAsync();
+    }
+
+    public async Task DeleteUserAsync(UserEntity userEntity)
+    {
+        _context.Users.Remove(userEntity);
+        await _context.SaveChangesAsync();
     }
 }
