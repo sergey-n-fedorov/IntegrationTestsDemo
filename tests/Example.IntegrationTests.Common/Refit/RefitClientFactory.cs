@@ -5,15 +5,15 @@ using Refit;
 
 namespace Example.IntegrationTests.Refit;
 
-public class RefitClientScopeFactory<TServiceClient, TEntryPoint> where TEntryPoint : class where TServiceClient : class
+public class RefitClientFactory<TServiceClient, TEntryPoint> where TEntryPoint : class where TServiceClient : class
 {
-    public TServiceClient GetClient() => _serviceProvider.Value.GetRequiredService<TServiceClient>();
+    public TServiceClient CreateClient() => _serviceProvider.Value.GetRequiredService<TServiceClient>();
     
     public IDisposable CreateExampleContextScope(ExampleContext? exampleContext) => _serviceProvider.Value.GetRequiredService<TestExampleContextProvider>().CreateScope(exampleContext);
     
     private readonly Lazy<IServiceProvider> _serviceProvider;
 
-    public RefitClientScopeFactory(WebApplicationFactory<TEntryPoint> webApplicationFactory)
+    public RefitClientFactory(WebApplicationFactory<TEntryPoint> webApplicationFactory)
     {
         _serviceProvider = new Lazy<IServiceProvider>(BuildServiceProvider(webApplicationFactory));
     }

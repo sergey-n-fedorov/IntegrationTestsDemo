@@ -1,12 +1,12 @@
 using Example.Api.Controllers;
 using Example.Data;
-using Example.IntegrationTests.Extensions;
+using Example.IntegrationTests.TestContainers;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Testcontainers.PostgreSql;
 
-namespace Example.IntegrationTests.Factories;
+namespace Example.IntegrationTests.Factories.Samples;
 
 public class BaseWebApplicationFactory: WebApplicationFactory<UserController>, IAsyncLifetime
 {
@@ -25,7 +25,7 @@ public class BaseWebApplicationFactory: WebApplicationFactory<UserController>, I
         builder.ConfigureServices(services =>
         {
             services.AddSingleton(new MockSetup().ExternalServiceClient.Object);
-            services.AddSingleton(new IntegrationContextConfiguration { ConnectionString = PostgresContainer.GetConnectionString().WithPoolingDisabled() });
+            services.AddSingleton(new IntegrationContextConfiguration { ConnectionString = PostgresContainer.GetConnectionStringWithPoolingDisabled() });
         });
         
         return base.CreateHost(builder);

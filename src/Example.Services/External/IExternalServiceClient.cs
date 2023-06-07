@@ -7,6 +7,6 @@ public interface IExternalServiceClient
     [Get("/api/v1/User")]
     public Task<List<ExternalUser>> GetAllUsersAsync();
     
-    [Post("/api/v1/User")]
-    public Task UpdateUser(ExternalUser user);
+    [Delete("/api/v1/User")]
+    public Task DeleteUser(string userId);
 }

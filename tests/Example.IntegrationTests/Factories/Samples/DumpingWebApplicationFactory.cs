@@ -1,9 +1,11 @@
 using Example.IntegrationTests.TestContainers;
 using Example.Services;
+using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Example.IntegrationTests.Factories;
+namespace Example.IntegrationTests.Factories.Samples;
 
+[UsedImplicitly]
 public class DumpingWebApplicationFactory: BaseWebApplicationFactory
 {
     public  Task RestoreFromDumpAsync() => PostgresContainer.RestoreDatabaseAsync(DatabaseName);

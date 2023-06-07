@@ -1,3 +1,4 @@
+using Npgsql;
 using Testcontainers.PostgreSql;
 using static Example.IntegrationTests.TestContainers.TestContainerTools;
 
@@ -29,5 +30,15 @@ public static class PostgreSqlContainerExtensions
     public static PostgreSqlBuilder WithDatabaseBackupMapping(this PostgreSqlBuilder builder, string dumpFileHostPath)
     {
         return builder.WithResourceMapping(dumpFileHostPath, $"/{DumpFilePathInContainer}");
+    }
+    
+    public static string GetConnectionStringWithPoolingDisabled(this PostgreSqlContainer container)
+    {
+        NpgsqlConnectionStringBuilder builder = new NpgsqlConnectionStringBuilder(container.GetConnectionString())
+        {
+            Pooling = false
+        };
+
+        return builder.ToString();
     }
 }

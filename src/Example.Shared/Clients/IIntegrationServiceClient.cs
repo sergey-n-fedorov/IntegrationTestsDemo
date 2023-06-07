@@ -11,6 +11,6 @@ public interface IIntegrationServiceClient
     [Post("/api/v1/User/fetch")]
     Task FetchUsersAsync();
     
-    [Post("/api/v1/User")]
-    Task UpdateUserAsync(User user);
+    [Delete("/api/v1/User/{userId}")]
+    Task DeleteUserAsync(int userId);
 }

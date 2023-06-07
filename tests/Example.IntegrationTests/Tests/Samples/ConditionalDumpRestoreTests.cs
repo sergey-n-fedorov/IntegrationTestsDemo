@@ -1,4 +1,5 @@
 using Example.IntegrationTests.Factories;
+using Example.IntegrationTests.Factories.Samples;
 using Example.IntegrationTests.TestContext;
 using Example.Shared.Models;
 using Newtonsoft.Json;

@@ -1,4 +1,5 @@
 using Example.Services.External;
+using Moq;
 
 namespace Example.IntegrationTests;
 

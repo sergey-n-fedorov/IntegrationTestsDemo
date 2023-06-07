@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Example.Services.External;
 using Example.Data.Entities;
 using Example.Data.Repositories;
+using Example.Services.External;
 using Example.Shared;
 using Example.Shared.Models;
 
-namespace Example.Services.Impl;
+namespace Example.Services;
 
 public class UserService : IUserService
 {
@@ -52,6 +52,7 @@ public class UserService : IUserService
 
         if (dbUser != null)
         {
+            await _externalServiceClient.DeleteUser(dbUser.ExternalId);
             await _userRepository.DeleteUserAsync(dbUser);
         }
     }

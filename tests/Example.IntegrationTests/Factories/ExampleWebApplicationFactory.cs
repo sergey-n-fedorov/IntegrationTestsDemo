@@ -1,7 +1,9 @@
 using Example.Api.Controllers;
 using Example.Data;
 using Example.IntegrationTests.Refit;
+using Example.IntegrationTests.TestContainers;
 using Example.Shared.Clients;
+using JetBrains.Annotations;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,18 +11,19 @@ using Testcontainers.PostgreSql;
 
 namespace Example.IntegrationTests.Factories;
 
-public class IntegrationWebApplicationFactory : WebApplicationFactory<UserController>, IAsyncLifetime
+[UsedImplicitly]
+public class ExampleWebApplicationFactory : WebApplicationFactory<UserController>, IAsyncLifetime
 {
     private const string DatabaseName = "integration_tests";
     
-    public RefitClientScopeFactory<IIntegrationServiceClient, UserController> ClientScopeFactory = null!;
+    public RefitClientFactory<IIntegrationServiceClient, UserController> ClientFactory = null!;
     
     public MockSetup MockSetup { get; } = new();
     
     private readonly PostgreSqlContainer _postgresSqlContainer = new PostgreSqlBuilder()
         // .WithPortBinding(51111, PostgreSqlBuilder.PostgreSqlPort)
         .WithDatabase(DatabaseName)
-        // .WithDatabaseBackupMapping("TestData/Dumps/data_backup.dump")
+        .WithDatabaseBackupMapping(TestDataProvider.DatabaseDumpPath)
         .Build();
     
     
@@ -38,8 +41,9 @@ public class IntegrationWebApplicationFactory : WebApplicationFactory<UserContro
     public async Task InitializeAsync()
     {
         await _postgresSqlContainer.StartAsync();
+        await _postgresSqlContainer.RestoreDatabaseAsync(DatabaseName);
         
-        ClientScopeFactory = new RefitClientScopeFactory<IIntegrationServiceClient, UserController>(this);
+        ClientFactory = new RefitClientFactory<IIntegrationServiceClient, UserController>(this);
     }
 
     async Task IAsyncLifetime.DisposeAsync()

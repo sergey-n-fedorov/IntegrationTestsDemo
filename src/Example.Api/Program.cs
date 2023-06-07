@@ -2,7 +2,6 @@ using Example.Data;
 using Example.Data.Repositories;
 using Example.Services;
 using Example.Services.External;
-using Example.Services.Impl;
 using Example.Services.Mappings;
 using Example.Shared;
 using Example.Shared.Clients;
