@@ -1,4 +1,5 @@
 using Example.Shared;
+using Example.Shared.Context;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Example.IntegrationTests;

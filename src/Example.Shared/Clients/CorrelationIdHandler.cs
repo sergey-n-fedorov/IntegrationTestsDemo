@@ -1,4 +1,6 @@
-﻿namespace Example.Shared.Clients;
+﻿using Example.Shared.Context;
+
+namespace Example.Shared.Clients;
 
 public class CorrelationIdHandler: DelegatingHandler
 {

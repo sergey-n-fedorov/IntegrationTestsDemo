@@ -2,6 +2,7 @@ using Example.IntegrationTests.Factories;
 using Example.Services;
 using Example.Shared;
 using Example.Shared.Clients;
+using Example.Shared.Context;
 using Example.Shared.Models;
 using Microsoft.Extensions.DependencyInjection;
 

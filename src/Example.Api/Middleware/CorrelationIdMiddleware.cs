@@ -1,6 +1,7 @@
-using Microsoft.AspNetCore.Http;
+using Example.Shared;
+using Example.Shared.Context;
 
-namespace Example.Shared;
+namespace Example.Api.Middleware;
 
 public class CorrelationIdMiddleware
 {
@@ -17,7 +18,7 @@ public class CorrelationIdMiddleware
     {
         if (context.Request.Headers.TryGetValue(Constants.CorrelationIdHeaderName, out var correlationId) && !string.IsNullOrEmpty(correlationId))
         {
-            _exampleContextProvider.Set(new ExampleContext(Guid.Parse(correlationId)));
+            _exampleContextProvider.Set(new ExampleContext(Guid.Parse(correlationId!)));
         }
 
         await _next(context);

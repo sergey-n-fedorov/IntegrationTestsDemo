@@ -1,4 +1,4 @@
-﻿namespace Example.Shared;
+﻿namespace Example.Shared.Context;
 
 public class ExampleContext
 {

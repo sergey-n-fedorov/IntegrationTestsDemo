@@ -3,6 +3,7 @@ using Example.Data.Entities;
 using Example.Data.Repositories;
 using Example.Services.External;
 using Example.Shared;
+using Example.Shared.Context;
 using Example.Shared.Models;
 
 namespace Example.Services;

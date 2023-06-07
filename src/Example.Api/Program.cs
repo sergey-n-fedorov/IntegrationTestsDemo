@@ -1,3 +1,4 @@
+using Example.Api.Middleware;
 using Example.Data;
 using Example.Data.Repositories;
 using Example.Services;
@@ -5,8 +6,10 @@ using Example.Services.External;
 using Example.Services.Mappings;
 using Example.Shared;
 using Example.Shared.Clients;
+using Example.Shared.Context;
 using Microsoft.EntityFrameworkCore;
 using Refit;
+using HttpClientFactoryExtensions = Refit.HttpClientFactoryExtensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +28,8 @@ builder.Services.AddSingleton(w => new IntegrationContextConfiguration
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddTransient<CorrelationIdHandler>();
-builder.Services.AddRefitClient<IExternalServiceClient>()
+
+HttpClientFactoryExtensions.AddRefitClient<IExternalServiceClient>(builder.Services)
     .ConfigureHttpClient(c => c.BaseAddress = new Uri("https://api.external.com"));
 
 

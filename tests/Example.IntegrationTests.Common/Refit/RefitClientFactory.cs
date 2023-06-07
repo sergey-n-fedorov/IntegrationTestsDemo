@@ -1,4 +1,5 @@
 using Example.Shared;
+using Example.Shared.Context;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
