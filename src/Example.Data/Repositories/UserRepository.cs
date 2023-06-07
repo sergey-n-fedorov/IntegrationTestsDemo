@@ -11,13 +11,7 @@ public class UserRepository : IUserRepository
     {
         _context = context;
     }
-
-    public Task AddUser(UserEntity userEntity)
-    {
-        _context.Users.Add(userEntity);
-        return _context.SaveChangesAsync();
-    }
-
+    
     public Task<List<UserEntity>> GetAllUsersAsync()
     {
         return _context.Users.ToListAsync();
@@ -28,13 +22,6 @@ public class UserRepository : IUserRepository
         return _context.Users.FindAsync(userId).AsTask();
     }
     
-    public Task UpdateUserAsync(UserEntity userEntity)
-    {
-        _context.Entry(userEntity).State = EntityState.Modified;
-        return _context.SaveChangesAsync();
-
-    }
-
     public Task AddRangeAsync(IEnumerable<UserEntity> entities)
     {
         _context.Users.AddRange(entities);

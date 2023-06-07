@@ -34,18 +34,7 @@ public class UserService : IUserService
         var dbUsers = await _userRepository.GetAllUsersAsync();
         return _mapper.Map<List<User>>(dbUsers);
     }
-
-    public async Task UpdateUserAsync(User user)
-    {
-        var dbUser = await _userRepository.Find(user.Id);
-        if (dbUser == null) throw new KeyNotFoundException();
-
-        dbUser.Address = user.Address;
-        dbUser.Name = user.Name;
-
-        await _userRepository.UpdateUserAsync(dbUser);
-    }
-
+    
     public async Task DeleteAsync(int userId)
     {
         var dbUser = await _userRepository.Find(userId);

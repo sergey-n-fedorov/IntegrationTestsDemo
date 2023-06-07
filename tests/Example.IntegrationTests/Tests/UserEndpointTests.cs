@@ -2,54 +2,38 @@ using Example.IntegrationTests.Factories;
 using Example.Services;
 using Example.Shared;
 using Example.Shared.Clients;
+using Example.Shared.Models;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Example.IntegrationTests.Tests;
 
-public class BaseEndpointTests : IClassFixture<ExampleWebApplicationFactory>, IDisposable
+public abstract class BaseEndpointTests : IClassFixture<ExampleWebApplicationFactory>, IDisposable
 {
-    private readonly IDisposable _contextScope;
-    private readonly ExampleWebApplicationFactory _factory;
-    
+    protected readonly ExampleWebApplicationFactory Factory;
     protected static readonly Guid TestCorrelationId = Guid.NewGuid(); 
     
-    protected ServerScope CreateServerScope(Guid correlationId) =>  new(_factory.Services, new ExampleContext(correlationId));
-    protected IDisposable CreateExampleContextScope(ExampleContext exampleContext) => _factory.ClientFactory.CreateExampleContextScope(exampleContext);
-    protected IIntegrationServiceClient CreateClient() => _factory.ClientFactory.CreateClient();
+    protected ServerScope CreateServerScope(Guid correlationId) =>  new(Factory.Services, new ExampleContext(correlationId));
+    protected IDisposable CreateExampleContextScope(ExampleContext exampleContext) => Factory.ClientFactory.CreateExampleContextScope(exampleContext);
+    protected IIntegrationServiceClient CreateClient() => Factory.ClientFactory.CreateClient();
+    
+    private readonly IDisposable _exampleContextScope;
 
-    public BaseEndpointTests(ExampleWebApplicationFactory factory)
+    protected BaseEndpointTests(ExampleWebApplicationFactory factory)
     {
-        _factory = factory;
-        _factory.MockSetup.ResetAndSetup();
-        _contextScope = CreateExampleContextScope(new ExampleContext(TestCorrelationId));
+        Factory = factory;
+        Factory.MockSetup.ResetAndSetup();
+        _exampleContextScope = CreateExampleContextScope(new ExampleContext(TestCorrelationId));
     }
 
     public void Dispose()
     {
-        _contextScope.Dispose();
+        _exampleContextScope.Dispose();
     }
 }
 
 
-public class UserEndpointTests : IClassFixture<ExampleWebApplicationFactory>, IDisposable
+public class UserEndpointTests : BaseEndpointTests
 {
-    private readonly IDisposable _contextScope;
-    private readonly ExampleWebApplicationFactory _factory;
-    
-    public static readonly Guid TestCorrelationId = Guid.NewGuid(); 
-    
-    protected ServerScope CreateServerScope(Guid correlationId) =>  new(_factory.Services, new ExampleContext(correlationId));
-    protected IDisposable CreateExampleContextScope(ExampleContext exampleContext) => _factory.ClientFactory.CreateExampleContextScope(exampleContext);
-    protected IIntegrationServiceClient CreateClient() => _factory.ClientFactory.CreateClient();
-
-    public UserEndpointTests(ExampleWebApplicationFactory factory)
-    {
-        _factory = factory;
-
-        _factory.MockSetup.ResetAndSetup();
-        _contextScope = CreateExampleContextScope(new ExampleContext(TestCorrelationId));
-    }
-
     [Fact]
     public async Task Test()
     {
@@ -72,11 +56,16 @@ public class UserEndpointTests : IClassFixture<ExampleWebApplicationFactory>, ID
     [Fact]
     public async Task Test_ServerScope()
     {
+        List<User> users;
+        
         using (var scope = CreateServerScope(Guid.NewGuid()))
         {
             var userService = scope.ServiceProvider.GetRequiredService<IUserService>();
-            var users  = await userService.GetAllAsync();
+            users  = await userService.GetAllAsync();
+           
         }
+        
+        users.Count.Should().Be(TestDataProvider.ExternalUsers.Count);
     }
     
     [Fact]
@@ -86,15 +75,15 @@ public class UserEndpointTests : IClassFixture<ExampleWebApplicationFactory>, ID
         var users = await CreateClient().GetUsersAsync();
         var userToDeleteId = users.First().Id;
 
-        _factory.MockSetup.ExternalServiceClient.Setup(w => w.DeleteUser(It.IsAny<string>())).ThrowsAsync(new Exception());
+        Factory.MockSetup.ExternalServiceClient.Setup(w => w.DeleteUser(It.IsAny<string>())).ThrowsAsync(new Exception());
 
         //Act and Assert
         Func<Task> act = async () => { await CreateClient().DeleteUserAsync(userToDeleteId); };
         await act.Should().ThrowAsync<Exception>();
     }
 
-    public void Dispose()
+
+    public UserEndpointTests(ExampleWebApplicationFactory factory) : base(factory)
     {
-        _contextScope.Dispose();
     }
 }

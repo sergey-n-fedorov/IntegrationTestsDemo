@@ -34,11 +34,4 @@ public class UserController : ControllerBase
         await _userService.DeleteAsync(userId);
         return Ok();
     }
-    
-    [HttpPost]
-    public async Task<ActionResult> UpdateUser([FromBody] User user)
-    {
-        await _userService.UpdateUserAsync(user);
-        return Ok();
-    }
 }
