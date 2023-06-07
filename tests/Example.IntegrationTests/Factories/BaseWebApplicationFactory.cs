@@ -18,7 +18,7 @@ public class BaseWebApplicationFactory: WebApplicationFactory<UserController>, I
         .WithDatabase(DatabaseName)
         .Build();
 
-    protected PostgreSqlContainer PostgresContainer { get; private set; }
+    protected PostgreSqlContainer PostgresContainer { get; private set; } = null!;
 
     protected override IHost CreateHost(IHostBuilder builder)
     {

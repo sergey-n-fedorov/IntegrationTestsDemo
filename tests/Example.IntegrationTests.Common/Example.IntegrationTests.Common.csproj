@@ -18,7 +18,13 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\src\Example.Services\Example.Services.csproj" />
       <ProjectReference Include="..\..\src\Example.Shared\Example.Shared.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <Content Include="TestData\**">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
 </Project>
