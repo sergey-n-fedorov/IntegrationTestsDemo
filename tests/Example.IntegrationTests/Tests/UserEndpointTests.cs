@@ -10,7 +10,8 @@ namespace Example.IntegrationTests.Tests;
 public abstract class BaseEndpointTests : IClassFixture<ExampleWebApplicationFactory>, IDisposable
 {
     protected readonly ExampleWebApplicationFactory Factory;
-    protected static readonly Guid TestCorrelationId = Guid.NewGuid(); 
+
+    private static readonly Guid TestCorrelationId = Guid.NewGuid(); 
     
     protected ServerScope CreateServerScope(Guid correlationId) =>  new(Factory.Services, new ExampleContext(correlationId));
     protected IDisposable CreateExampleContextScope(ExampleContext exampleContext) => Factory.ClientFactory.CreateExampleContextScope(exampleContext);
