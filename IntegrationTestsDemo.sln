@@ -1,18 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration.Api", "src\Integration.Api\Integration.Api.csproj", "{BB82D398-B7A3-479A-A5DF-E7C5034CA2DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Api", "src\Example.Api\Example.Api.csproj", "{BB82D398-B7A3-479A-A5DF-E7C5034CA2DA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4EA0311B-C18D-44D3-B6E0-383113130C13}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{62E63FB8-9C48-4AA3-B5EB-4E73DF4D729F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration.Data", "src\Integration.Data\Integration.Data.csproj", "{F86C16EE-AB92-43CC-BAAA-4C21543577A1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Data", "src\Example.Data\Example.Data.csproj", "{F86C16EE-AB92-43CC-BAAA-4C21543577A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration.Services", "src\Integration.Services\Integration.Services.csproj", "{F74C0B1A-210D-42BB-96E5-867F401C33EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Services", "src\Example.Services\Example.Services.csproj", "{F74C0B1A-210D-42BB-96E5-867F401C33EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration.IntegrationTests", "tests\Integration.IntegrationTests\Integration.IntegrationTests.csproj", "{6D9E8FBB-8AC5-4074-A7D8-4ABE428A2FBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.IntegrationTests", "tests\Example.IntegrationTests\Example.IntegrationTests.csproj", "{6D9E8FBB-8AC5-4074-A7D8-4ABE428A2FBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Integration.Shared", "src\Integration.Shared\Integration.Shared.csproj", "{C2702A90-E938-4096-AAEF-718A4B69B57F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Shared", "src\Example.Shared\Example.Shared.csproj", "{C2702A90-E938-4096-AAEF-718A4B69B57F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
