@@ -2,7 +2,7 @@ using Example.IntegrationTests.Factories;
 using Example.Shared.Models;
 using Newtonsoft.Json;
 
-namespace Example.IntegrationTests.Tests.Basic;
+namespace Example.IntegrationTests.Tests.Samples;
 
 public class ExistingDumpTests : IClassFixture<ExistingDumpWebApplicationFactory>
 {

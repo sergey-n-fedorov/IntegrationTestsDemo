@@ -1,8 +1,8 @@
 using Example.IntegrationTests.Factories;
 
-namespace Example.IntegrationTests.Tests.Basic;
+namespace Example.IntegrationTests.Tests.Samples;
 
-public abstract class ClassFixtureTests : IClassFixture<BaseWebApplicationFactory>
+public class ClassFixtureTests : IClassFixture<BaseWebApplicationFactory>
 {
     private readonly BaseWebApplicationFactory _factory;
 
@@ -14,7 +14,6 @@ public abstract class ClassFixtureTests : IClassFixture<BaseWebApplicationFactor
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
-    [InlineData(3)]
     public async Task Test(int index)
     {
         //Act
@@ -26,23 +25,17 @@ public abstract class ClassFixtureTests : IClassFixture<BaseWebApplicationFactor
     }
 }
 
-public class ClassFixture1Tests : ClassFixtureTests
+public class ClassFixtureTestsClone1 : ClassFixtureTests
 {
-    public ClassFixture1Tests(BaseWebApplicationFactory factory) : base(factory)
+    public ClassFixtureTestsClone1(BaseWebApplicationFactory factory) : base(factory)
     {
     }
 }
 
-public class ClassFixture2Tests : ClassFixtureTests
+public class ClassFixtureTestsClone2 : ClassFixtureTests
 {
-    public ClassFixture2Tests(BaseWebApplicationFactory factory) : base(factory)
+    public ClassFixtureTestsClone2(BaseWebApplicationFactory factory) : base(factory)
     {
     }
 }
 
-public class ClassFixture3Tests : ClassFixtureTests
-{
-    public ClassFixture3Tests(BaseWebApplicationFactory factory) : base(factory)
-    {
-    }
-}

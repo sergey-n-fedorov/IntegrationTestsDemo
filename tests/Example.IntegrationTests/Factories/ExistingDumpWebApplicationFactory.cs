@@ -1,4 +1,4 @@
-using Example.IntegrationTests.Tools.TestContainers;
+using Example.IntegrationTests.TestContainers;
 using Testcontainers.PostgreSql;
 
 namespace Example.IntegrationTests.Factories;

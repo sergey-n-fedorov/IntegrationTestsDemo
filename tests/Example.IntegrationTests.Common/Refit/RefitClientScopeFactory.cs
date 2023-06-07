@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
 
-namespace Example.IntegrationTests.Tools.Refit;
+namespace Example.IntegrationTests.Refit;
 
-public class ClientServiceProvider<TServiceClient, TEntryPoint> where TEntryPoint : class where TServiceClient : class
+public class RefitClientScopeFactory<TServiceClient, TEntryPoint> where TEntryPoint : class where TServiceClient : class
 {
     public TServiceClient GetClient() => _serviceProvider.Value.GetRequiredService<TServiceClient>();
     
@@ -13,7 +13,7 @@ public class ClientServiceProvider<TServiceClient, TEntryPoint> where TEntryPoin
     
     private readonly Lazy<IServiceProvider> _serviceProvider;
 
-    public ClientServiceProvider(WebApplicationFactory<TEntryPoint> webApplicationFactory)
+    public RefitClientScopeFactory(WebApplicationFactory<TEntryPoint> webApplicationFactory)
     {
         _serviceProvider = new Lazy<IServiceProvider>(BuildServiceProvider(webApplicationFactory));
     }

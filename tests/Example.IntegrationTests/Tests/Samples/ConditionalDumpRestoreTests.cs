@@ -1,8 +1,9 @@
-using Example.IntegrationTests;
 using Example.IntegrationTests.Factories;
-using Example.IntegrationTests.Tools;
+using Example.IntegrationTests.TestContext;
 using Example.Shared.Models;
 using Newtonsoft.Json;
+
+namespace Example.IntegrationTests.Tests.Samples;
 
 public class ConditionalDumpRestoreTests : IClassFixture<DumpingWebApplicationFactory>, IDisposable
 {
@@ -29,7 +30,6 @@ public class ConditionalDumpRestoreTests : IClassFixture<DumpingWebApplicationFa
     [Theory, ChangesState]
     [InlineData(1)]
     [InlineData(2)]
-    [InlineData(3)]
     public async Task DeleteTest(int index)
     {
         //Arrange

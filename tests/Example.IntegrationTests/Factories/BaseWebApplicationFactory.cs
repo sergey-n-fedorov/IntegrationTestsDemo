@@ -1,5 +1,6 @@
 using Example.Api.Controllers;
 using Example.Data;
+using Example.IntegrationTests.Extensions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,6 +14,7 @@ public class BaseWebApplicationFactory: WebApplicationFactory<UserController>, I
     
     protected virtual PostgreSqlContainer BuildPostgreSqlContainer() => 
         new PostgreSqlBuilder()
+        // .WithPortBinding(51111, PostgreSqlBuilder.PostgreSqlPort)
         .WithDatabase(DatabaseName)
         .Build();
 
@@ -23,7 +25,7 @@ public class BaseWebApplicationFactory: WebApplicationFactory<UserController>, I
         builder.ConfigureServices(services =>
         {
             services.AddSingleton(new MockSetup().ExternalServiceClient.Object);
-            services.AddSingleton(new IntegrationContextConfiguration { ConnectionString = PostgresContainer.GetConnectionString() });
+            services.AddSingleton(new IntegrationContextConfiguration { ConnectionString = PostgresContainer.GetConnectionString().WithPoolingDisabled() });
         });
         
         return base.CreateHost(builder);

@@ -1,6 +1,6 @@
 using Example.Api.Controllers;
-using Example.IntegrationTests.Tools.Refit;
 using Example.Data;
+using Example.IntegrationTests.Refit;
 using Example.Shared.Clients;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +13,7 @@ public class IntegrationWebApplicationFactory : WebApplicationFactory<UserContro
 {
     private const string DatabaseName = "integration_tests";
     
-    public ClientServiceProvider<IIntegrationServiceClient, UserController> ClientServiceProvider = null!;
+    public RefitClientScopeFactory<IIntegrationServiceClient, UserController> ClientScopeFactory = null!;
     
     public MockSetup MockSetup { get; } = new();
     
@@ -39,7 +39,7 @@ public class IntegrationWebApplicationFactory : WebApplicationFactory<UserContro
     {
         await _postgresSqlContainer.StartAsync();
         
-        ClientServiceProvider = new ClientServiceProvider<IIntegrationServiceClient, UserController>(this);
+        ClientScopeFactory = new RefitClientScopeFactory<IIntegrationServiceClient, UserController>(this);
     }
 
     async Task IAsyncLifetime.DisposeAsync()

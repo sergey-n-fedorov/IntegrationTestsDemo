@@ -1,4 +1,4 @@
-﻿namespace Example.IntegrationTests.Tools;
+﻿namespace Example.IntegrationTests.TestContext;
 
 public class IntegrationTestContext
 {

@@ -1,5 +1,4 @@
 using Example.IntegrationTests.Factories;
-using Example.IntegrationTests.Tools;
 using Example.Services;
 using Example.Shared;
 using Example.Shared.Clients;
@@ -17,8 +16,8 @@ public class UserEndpointTests : IClassFixture<IntegrationWebApplicationFactory>
     private static readonly Guid TestCorrelationId = new("11111111-1111-1111-1111-111111111111"); 
     
     protected ServerScope CreateServerScope(Guid correlationId) =>  new(_factory.Services, new ExampleContext(correlationId));
-    protected IDisposable CreateClientScope(ExampleContext exampleContext) => _factory.ClientServiceProvider.CreateExampleContextScope(exampleContext);
-    protected IIntegrationServiceClient GetClient() => _factory.ClientServiceProvider.GetClient();
+    protected IDisposable CreateClientScope(ExampleContext exampleContext) => _factory.ClientScopeFactory.CreateExampleContextScope(exampleContext);
+    protected IIntegrationServiceClient GetClient() => _factory.ClientScopeFactory.GetClient();
 
     public UserEndpointTests(IntegrationWebApplicationFactory factory, ITestOutputHelper output)
     {

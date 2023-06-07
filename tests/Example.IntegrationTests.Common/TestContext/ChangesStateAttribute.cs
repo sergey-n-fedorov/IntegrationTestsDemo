@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using Xunit.Sdk;
 
-namespace Example.IntegrationTests.Tools;
+namespace Example.IntegrationTests.TestContext;
 
 public class ChangesStateAttribute : BeforeAfterTestAttribute
 {

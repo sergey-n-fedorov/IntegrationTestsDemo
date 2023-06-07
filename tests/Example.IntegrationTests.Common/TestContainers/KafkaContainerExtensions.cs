@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Testcontainers.Kafka;
 using Xunit.Abstractions;
 
-namespace Example.IntegrationTests.Tools.TestContainers;
+namespace Example.IntegrationTests.TestContainers;
 
 public static class KafkaContainerExtensions
 {

@@ -1,4 +1,4 @@
-namespace Example.IntegrationTests.Tools.TestContainers;
+namespace Example.IntegrationTests.TestContainers;
 
 internal static class TestContainerTools
 {

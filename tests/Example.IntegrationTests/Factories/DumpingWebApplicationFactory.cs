@@ -1,4 +1,4 @@
-using Example.IntegrationTests.Tools.TestContainers;
+using Example.IntegrationTests.TestContainers;
 using Example.Services;
 using Microsoft.Extensions.DependencyInjection;
 

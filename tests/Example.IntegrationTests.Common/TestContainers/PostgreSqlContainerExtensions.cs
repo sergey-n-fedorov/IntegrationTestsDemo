@@ -1,7 +1,7 @@
 using Testcontainers.PostgreSql;
-using static Example.IntegrationTests.Tools.TestContainers.TestContainerTools;
+using static Example.IntegrationTests.TestContainers.TestContainerTools;
 
-namespace Example.IntegrationTests.Tools.TestContainers;
+namespace Example.IntegrationTests.TestContainers;
 
 public static class PostgreSqlContainerExtensions 
 {

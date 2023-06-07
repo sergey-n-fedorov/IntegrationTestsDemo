@@ -1,4 +1,4 @@
-namespace Example.IntegrationTests.Tools;
+namespace Example.IntegrationTests;
 
 public class DisposableAction : IDisposable
 {

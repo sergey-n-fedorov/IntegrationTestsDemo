@@ -1,6 +1,6 @@
 using Example.IntegrationTests.Factories;
 
-namespace Example.IntegrationTests.Tests.Basic;
+namespace Example.IntegrationTests.Tests.Samples;
 
 [CollectionDefinition(nameof(CollectionFixture))]
 public class CollectionFixture : ICollectionFixture<BaseWebApplicationFactory>
@@ -11,7 +11,7 @@ public class CollectionFixture : ICollectionFixture<BaseWebApplicationFactory>
 }
 
 [Collection(nameof(CollectionFixture))]
-public abstract class CollectionFixtureTests 
+public class CollectionFixtureTests 
 {
     private readonly BaseWebApplicationFactory _factory;
 
@@ -23,7 +23,6 @@ public abstract class CollectionFixtureTests
     [Theory]
     [InlineData(1)]
     [InlineData(2)]
-    [InlineData(3)]
     public async Task Test(int index)
     {
         //Act
@@ -35,16 +34,9 @@ public abstract class CollectionFixtureTests
     }
 }
 
-public class CollectionFixture1Tests : CollectionFixtureTests
+public class CollectionFixtureTestsClone1 : CollectionFixtureTests
 {
-    public CollectionFixture1Tests(BaseWebApplicationFactory factory) : base(factory)
-    {
-    }
-}
-
-public class CollectionFixture2Tests : CollectionFixtureTests
-{
-    public CollectionFixture2Tests(BaseWebApplicationFactory factory) : base(factory)
+    public CollectionFixtureTestsClone1(BaseWebApplicationFactory factory) : base(factory)
     {
     }
 }
