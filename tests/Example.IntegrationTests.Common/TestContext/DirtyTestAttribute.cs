@@ -3,7 +3,7 @@ using Xunit.Sdk;
 
 namespace Example.IntegrationTests.TestContext;
 
-public class ChangesStateAttribute : BeforeAfterTestAttribute
+public class DirtyTestAttribute : BeforeAfterTestAttribute
 {
     public override void Before(MethodInfo methodUnderTest)
     {

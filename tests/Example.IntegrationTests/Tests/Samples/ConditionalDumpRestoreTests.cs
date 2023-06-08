@@ -28,7 +28,7 @@ public class ConditionalDumpRestoreTests : IClassFixture<DumpingWebApplicationFa
     }
 
 
-    [Theory, ChangesState]
+    [Theory, DirtyTest]
     [InlineData(1)]
     [InlineData(2)]
     public async Task DeleteTest(int index)
@@ -56,7 +56,7 @@ public class ConditionalDumpRestoreTests : IClassFixture<DumpingWebApplicationFa
 
     public void Dispose()
     {
-        if (IntegrationTestContext.Current.StateChanged)
+        if (IntegrationTestContext.Current?.StateChanged == true)
         {
             _factory.RestoreFromDumpAsync().Wait();
         }
